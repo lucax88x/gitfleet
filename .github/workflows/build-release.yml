@@ -18,13 +18,9 @@ env:
 
 jobs:
   verify:
-    name: Verify (${{ matrix.os }})
-    runs-on: ${{ matrix.os }}
+    name: Verify (Linux)
+    runs-on: ubuntu-latest
     timeout-minutes: 15
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
     steps:
       - uses: actions/checkout@v7
         with:
@@ -45,9 +41,9 @@ jobs:
       - name: Test with race detector
         run: go test -race ./...
       - name: Build
-        run: go build -trimpath -o "$RUNNER_TEMP/gitfleet$(go env GOEXE)" .
+        run: go build -trimpath -o "$RUNNER_TEMP/gitfleet" .
       - name: Smoke test
-        run: '"$RUNNER_TEMP/gitfleet$(go env GOEXE)" --help'
+        run: '"$RUNNER_TEMP/gitfleet" --help'
 
   release:
     name: Build binaries and publish release

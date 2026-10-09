@@ -27,10 +27,11 @@ scan warnings in the output panel. There is no saved workspace configuration.
 ## Downloads and automated releases
 
 Every push to `main` runs formatting checks, `go vet`, race tests, and a native
-build and help-command smoke test on Linux, macOS, and Windows. Pull requests
+build and help-command smoke test on Linux. Pull requests
 targeting `main` run the same checks without publishing a release.
 
-After all checks pass, GitHub Actions publishes a release tagged
+After all checks pass, a Linux runner cross-compiles binaries for Linux, macOS,
+and Windows on AMD64 and ARM64. GitHub Actions publishes a release tagged
 `main-<run-number>-<short-commit>` for the exact pushed commit. Releases contain
 `gitfleet-linux-amd64.tar.gz`, `gitfleet-linux-arm64.tar.gz`,
 `gitfleet-darwin-amd64.tar.gz`, `gitfleet-darwin-arm64.tar.gz`,
